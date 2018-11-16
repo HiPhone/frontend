@@ -1,30 +1,28 @@
 <template>
-  <v-app>
-    <v-toolbar app color="light-blue">
-      <v-toolbar-title class="headline ">
-        <span>Spring Security登录界面</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-    </v-toolbar>
-
-    <v-content>
-      <LoginPage/>
-    </v-content>
-  </v-app>
+  <div id="app">
+    <img alt="Vue logo" src="./assets/logo.png">
+    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  </div>
 </template>
 
 <script>
-import LoginPage from "./components/LoginPage";
+import HelloWorld from './components/HelloWorld.vue'
 
 export default {
-  name: "App",
+  name: 'app',
   components: {
-    LoginPage
-  },
-  data() {
-    return {
-      //
-    };
+    HelloWorld
   }
-};
+}
 </script>
+
+<style>
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+</style>
