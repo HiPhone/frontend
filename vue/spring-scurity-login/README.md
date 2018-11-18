@@ -1,4 +1,4 @@
-# spring-security-login
+# project
 
 ## Project setup
 ```

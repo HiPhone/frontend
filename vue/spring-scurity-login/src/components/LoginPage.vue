@@ -1,49 +1,75 @@
 <template>
-  <v-container fluid fill-height>
-    <v-layout align-center justify-center>
-      <v-flex xs12 sm8 md3>
-        <v-card class="elevation-18">
-          <v-toolbar dark color="light-blue">
-            <v-toolbar-title ><b>用户登陆</b></v-toolbar-title>
-          </v-toolbar>
-          <v-card-text>
-            <v-form >
-              <v-text-field prepend-icon="person" label="用户名：" type="text" v-model="loginMsg.username"></v-text-field>
-              <v-text-field prepend-icon="lock"  label="密码" type="password" v-model="loginMsg.password"></v-text-field>
-            </v-form>
-          </v-card-text>
-          <v-card-actions>
-            <v-btn color="light-blue" style="width: 100%; color: white" @click="login"><b>登陆</b></v-btn>
-          </v-card-actions>
-          <br>
-        </v-card>
-      </v-flex>
-    </v-layout>
-  </v-container>
+  <div>
+    <Row type="flex" justify="center">
+    <Card class="card-style">
+      <p slot="title" >登录</p>
+      <Form ref="loginForm" :model="loginModel" :rules="loginRules">
+        <FormItem prop="username">
+          <Input type="text" v-model="loginModel.username" placeholder="请输入用户名">
+            <Icon type="ios-person" slot="prepend"></Icon>
+          </Input>
+        </FormItem>
+        <FormItem prop="password">
+          <Input type="password" v-model="loginModel.password" placeholder="请输入密码">
+            <Icon type="ios-lock" slot="prepend"></Icon>
+          </Input>
+        </FormItem>
+      </Form>
+      <Button type="primary" long @click="login">登录</Button>
+    </Card>
+    </Row>
+  </div>
 </template>
 
 <script>
-import api from "../utils/api.js";
-import qs from "qs";
+import api from './utils/api.js'
+import qs from 'qs'
 export default {
-  data: () => ({
-    loginMsg: {
-      username: "",
-      password: ""
+  data() {
+    return {
+      loginModel: {
+        username: '',
+        password: ''
+      },
+      loginRules: {
+        username: [
+          {required: true, message: '请输入登录用户名', trigger: 'blur'} 
+        ],
+        password: [
+          {required: true, message: '请输入登录密码', trigger: 'blur'}
+        ]
+      }
     }
-  }),
+  },
   methods: {
     login: function() {
-      axios.post(api.login, qs.stringify(this.loginMsg), response => {
-        if (response.data.returnCode === 0) {
-          window.href.location = rsponse.data.data;
+      this.$refs.loginForm.validate((valid) => {
+        if (valid) {
+          let data = qs.stringify(this.loginModel);
+          axios.post(api.login, data)
+            .then(response => {
+              
+            })
+            .catch(error => {
+
+            })
         } else {
+          this.$Message.error({
+            content: '请填写必要信息!',
+            duration: 5
+          })
         }
-      });
+      })
     }
   }
-};
+}
 </script>
 
 <style>
+.card-style {
+  width: 400px;
+  margin-top: 14%;
+}
+
 </style>
+

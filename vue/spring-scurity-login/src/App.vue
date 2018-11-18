@@ -1,17 +1,19 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app" class="layout">
+    <Layout>
+      <Header><h1>Spring Security</h1></Header>
+      <Content><LoginPage></LoginPage></Content>
+      <Footer>Copy Right HiPhone 2018</Footer>
+    </Layout>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import LoginPage from './components/LoginPage.vue'
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    LoginPage
   }
 }
 </script>
@@ -23,6 +25,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+h1 {
+  color: white
 }
 </style>
