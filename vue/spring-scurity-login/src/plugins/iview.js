@@ -1,6 +1,10 @@
-import Vue from 'vue'
-import iView from 'iview'
+import Vue from "vue";
+import iView from "iview";
 
-Vue.use(iView)
+Vue.use(iView);
 
-import '../iview-variables.less'
+iView.Message.config({
+  duration: 5
+});
+
+import "../iview-variables.less";

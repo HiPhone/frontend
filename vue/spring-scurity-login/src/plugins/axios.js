@@ -1,7 +1,9 @@
 "use strict";
 
-import Vue from 'vue';
+import Vue from "vue";
 import axios from "axios";
+import router from "../router";
+import { Message } from "iview";
 
 // Full config:  https://github.com/axios/axios#request-config
 // axios.defaults.baseURL = process.env.baseURL || process.env.apiUrl || '';
@@ -10,7 +12,7 @@ import axios from "axios";
 
 let config = {
   // baseURL: process.env.baseURL || process.env.apiUrl || ""
-  timeout: 10 * 1000, // Timeout
+  timeout: 10 * 1000 // Timeout
   // withCredentials: true, // Check cross-site Access-Control
 };
 
@@ -31,15 +33,19 @@ _axios.interceptors.request.use(
 _axios.interceptors.response.use(
   function(response) {
     // Do something with response data
-    return response;
+    return response.data;
   },
   function(error) {
-    // Do something with response error
-    return Promise.reject(error);
+    if (error.response.status === 403) {
+      router.push("/login");
+    } else if (error.response.status === 404) {
+    } else {
+      Message.error("网络出错，请稍后尝试");
+    }
   }
 );
 
-Plugin.install = function(Vue, options) {
+Plugin.install = function(Vue) {
   Vue.axios = _axios;
   window.axios = _axios;
   Object.defineProperties(Vue.prototype, {
@@ -52,10 +58,10 @@ Plugin.install = function(Vue, options) {
       get() {
         return _axios;
       }
-    },
+    }
   });
 };
 
-Vue.use(Plugin)
+Vue.use(Plugin);
 
 export default Plugin;
