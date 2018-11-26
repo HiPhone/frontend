@@ -5,12 +5,12 @@
         <p slot="title" >登录</p>
         <Form ref="loginForm" :model="loginModel" :rules="loginRules">
           <FormItem prop="username">
-            <Input type="text" v-model="loginModel.username" placeholder="请输入用户名">
+            <Input type="text" v-model="loginModel.username" placeholder="请输入用户名" @on-enter="login">
               <Icon type="ios-person" slot="prepend"></Icon>
             </Input>
           </FormItem>
           <FormItem prop="password">
-            <Input type="password" v-model="loginModel.password" placeholder="请输入密码">
+            <Input type="password" v-model="loginModel.password" placeholder="请输入密码" @on-enter="login">
               <Icon type="ios-lock" slot="prepend"></Icon>
             </Input>
           </FormItem>
