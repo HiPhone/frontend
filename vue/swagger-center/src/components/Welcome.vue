@@ -1,8 +1,10 @@
 <template>
   <div>
-    <Row type="flex" justify="center">
-      <h1>{{message}}</h1>
-    </Row>
+    <Menu active-name="1" style="height: 91vh">
+      <MenuItem :name="item.name" v-for="item in serviceData">
+        {{item.title}}
+      </MenuItem> 
+    </Menu>
   </div>
 </template>
 
@@ -11,21 +13,26 @@ import api from "../utils/api.js";
 export default {
   data() {
     return {
-      message: ""
+      serviceData: []
     };
   },
   methods: {
-    queryWelcomeMessage: function() {
+    queryServiceNames: function() {
+      this.serviceData = [];
       axios
-        .get(api.user)
+        .get(api.service_name)
         .then(response => {
-          this.message = response.data;
+          for (let i = 0; i < response.data.length; i++) {
+            let tmp = {};
+            tmp.title = response.data[i];
+            tmp.name = "" + i + 1;
+            this.serviceData.push(tmp);
+          }
         })
-        .catch(error => {});
     }
   },
   mounted: function() {
-    this.queryWelcomeMessage();
+    this.queryServiceNames();
   }
 };
 </script>

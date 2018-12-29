@@ -1,7 +1,7 @@
 <template>
   <div id="app" >
     <Layout>
-      <Header><p>Spring Security</p></Header>
+      <Header><p>Swagger Center</p></Header>
       <Content><router-view></router-view></Content>
       <Footer>Copy Right HiPhone 2018</Footer>
     </Layout>

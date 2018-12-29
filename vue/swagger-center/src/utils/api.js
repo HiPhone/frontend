@@ -2,7 +2,7 @@ let _prefix = "http://localhost:8082";
 
 const Api = {
   login: _prefix + "/login",
-  user: _prefix + "/user"
+  service_name: _prefix + "/front/service-names"
 };
 
 export default Api;

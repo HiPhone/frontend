@@ -32,6 +32,7 @@
 <script>
 import api from "../utils/api.js";
 import qs from "qs";
+const key = "hcFKesGkfEkECB951q7VDoXBSnrBpHxJ";
 export default {
   data() {
     return {
